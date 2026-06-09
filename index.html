@@ -126,7 +126,8 @@
       gap: 1rem;
     }
 
-    .cart-btn {
+    .cart-btn,
+    .instagram-btn {
       position: relative;
       background: none;
       border: none;
@@ -135,9 +136,17 @@
       display: flex;
       align-items: center;
       color: var(--text-dark);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .cart-btn svg {
+    .cart-btn:hover,
+    .instagram-btn:hover {
+      color: var(--rose-dark);
+    }
+
+    .cart-btn svg,
+    .instagram-btn svg {
       width: 22px;
       height: 22px;
     }
@@ -1616,7 +1625,8 @@
         justify-content: center;
       }
 
-      .cart-btn {
+      .cart-btn,
+      .instagram-btn {
         min-width: 44px;
         min-height: 44px;
         justify-content: center;
@@ -2058,6 +2068,14 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
+      <a href="https://www.instagram.com/fifacollection88/" target="_blank" class="instagram-btn" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+        </svg>
+      </a>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Open cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
           stroke-linejoin="round">
