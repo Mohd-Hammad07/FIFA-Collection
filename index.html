@@ -460,6 +460,8 @@
       aspect-ratio: 3/4;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      background-color: var(--cream);
     }
 
     .product-img-inner {
@@ -467,6 +469,8 @@
       height: 100%;
       display: block;
       position: relative;
+      object-fit: contain;
+      background-color: var(--cream);
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
@@ -1782,19 +1786,23 @@
       color: var(--rose);
     }
 
-    /* Update product image for parallax */
+    /* Update product image to show full model and details */
     .product-img {
       width: 100%;
       aspect-ratio: 3/4;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      background-color: var(--cream);
     }
     .product-img-inner {
       width: 100%;
-      height: 120%; /* Extra height for parallax */
+      height: 100%;
       display: block;
-      position: absolute;
-      top: -10%;
+      position: relative;
+      top: 0;
+      object-fit: contain;
+      background-color: var(--cream);
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .product-card:hover .product-img-inner {
@@ -2044,6 +2052,130 @@
     .btn-checkout-primary:hover {
       background: var(--rose-dark);
     }
+
+    /* ---- LIGHTBOX ---- */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 20, 19, 0.95);
+      backdrop-filter: blur(15px);
+      z-index: 4000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .lightbox-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 36px;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.2s;
+      z-index: 4300;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover {
+      color: var(--rose);
+      transform: scale(1.1);
+    }
+
+    .lightbox-content-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 6rem 2rem;
+    }
+
+    .lightbox-zoom-controls {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(28, 27, 24, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 20px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 4200;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-zoom-controls button {
+      background: none;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 50%;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lightbox-zoom-controls button:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--rose);
+    }
+
+    .lightbox-zoom-controls button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    #lightbox-zoom-reset {
+      border-left: 1px solid rgba(255,255,255,0.2);
+      padding-left: 10px;
+      border-radius: 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    #lightbox-zoom-reset:hover {
+      background: none;
+    }
+
+    .lightbox-image-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.15s ease-out;
+      transform-origin: center center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 
@@ -2161,7 +2293,7 @@
 
       <div class="product-card" data-category="lawn">
         <div class="product-img">
-          <img src="Photots/Peach-viscose-pakistani-suit-16072.jpg" class="product-img-inner" style="object-fit:cover;">
+          <img src="Photots/19c0461258951eee706a503a28441e7b.jpg" class="product-img-inner">
           <div class="product-tag-badge">Lawn</div>
         </div>
         <div class="product-info">
@@ -2176,8 +2308,7 @@
 
       <div class="product-card" data-category="chiffon">
         <div class="product-img">
-          <img src="Photots/MP000000022234210_437Wx649H_202405121648081.avif" class="product-img-inner"
-            style="object-fit:cover;">
+          <img src="Photots/72c82cd0705b97203a6d006ebf9d54ed.jpg" class="product-img-inner">
           <div class="product-tag-badge">Chiffon</div>
         </div>
         <div class="product-info">
@@ -2193,8 +2324,7 @@
 
       <div class="product-card" data-category="silk">
         <div class="product-img">
-          <img src="Photots/CS07-Crimson-Summer_in_the_Meadows_-_D1A-2.webp" class="product-img-inner"
-            style="object-fit:cover; object-position: top;">
+          <img src="Photots/CS07-Crimson-Summer_in_the_Meadows_-_D1A-2.webp" class="product-img-inner">
           <div class="product-tag-badge">Silk</div>
         </div>
         <div class="product-info">
@@ -2209,7 +2339,7 @@
 
       <div class="product-card" data-category="formal">
         <div class="product-img">
-          <img src="Photots/pexels-dhanno-29413568.jpg" class="product-img-inner" style="object-fit:cover;">
+          <img src="Photots/pexels-dhanno-29413568.jpg" class="product-img-inner">
           <div class="product-tag-badge">Formal</div>
         </div>
         <div class="product-info">
@@ -2225,7 +2355,7 @@
 
       <div class="product-card" data-category="lawn">
         <div class="product-img">
-          <img src="Photots/pexels-dhanno-33210490.jpg" class="product-img-inner" style="object-fit:cover;">
+          <img src="Photots/pexels-dhanno-33210490.jpg" class="product-img-inner">
           <div class="product-tag-badge">Lawn</div>
         </div>
         <div class="product-info">
@@ -2240,7 +2370,7 @@
 
       <div class="product-card" data-category="silk">
         <div class="product-img">
-          <img src="Photots/pexels-dhanno-34933696.jpg" class="product-img-inner" style="object-fit:cover;">
+          <img src="Photots/pexels-dhanno-34933696.jpg" class="product-img-inner">
           <div class="product-tag-badge">Silk</div>
         </div>
         <div class="product-info">
@@ -2496,6 +2626,27 @@
       </span>
     </div>
   </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-overlay">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+    
+    <div class="lightbox-content-wrapper">
+      <div class="lightbox-image-container" id="lightbox-image-container">
+        <img id="lightbox-img" src="" alt="Product View">
+      </div>
+      <div class="lightbox-zoom-controls">
+        <button id="lightbox-zoom-out" aria-label="Zoom Out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <span id="lightbox-zoom-level">100%</span>
+        <button id="lightbox-zoom-in" aria-label="Zoom In">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button id="lightbox-zoom-reset" aria-label="Reset Zoom">Reset</button>
+      </div>
+    </div>
+  </div>
 
   <!-- CART OVERLAY + DRAWER -->
   <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
@@ -2951,21 +3102,137 @@
     repeat: -1
   });
 
-  // Parallax on Product Images
-  gsap.utils.toArray('.product-img-inner').forEach(img => {
-    gsap.fromTo(img,
-      { yPercent: -5 },
-      {
-        yPercent: 5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: img.closest('.product-card'),
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true
-        }
+  // Lightbox Modal Logic
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const zoomInBtn = document.getElementById('lightbox-zoom-in');
+  const zoomOutBtn = document.getElementById('lightbox-zoom-out');
+  const zoomResetBtn = document.getElementById('lightbox-zoom-reset');
+  const zoomLevelSpan = document.getElementById('lightbox-zoom-level');
+  const imageContainer = document.getElementById('lightbox-image-container');
+
+  let zoomScale = 1.0;
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let panX = 0, panY = 0;
+
+  function updateImageTransform() {
+    lightboxImg.style.transform = `scale(${zoomScale}) translate(${panX}px, ${panY}px)`;
+    zoomLevelSpan.innerText = `${Math.round(zoomScale * 100)}%`;
+  }
+
+  function openLightbox(src) {
+    lightboxImg.src = src;
+    lightboxModal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent page scrolling
+    // Reset zoom and pan
+    zoomScale = 1.0;
+    panX = 0;
+    panY = 0;
+    updateImageTransform();
+  }
+
+  function closeLightbox() {
+    lightboxModal.classList.remove('open');
+    document.body.style.overflow = ''; // restore scrolling
+  }
+
+  // Bind click event to all product image wrappers
+  document.querySelectorAll('.product-img').forEach(imgWrapper => {
+    imgWrapper.addEventListener('click', (e) => {
+      // Don't trigger lightbox if clicking the category badge
+      if (e.target.classList.contains('product-tag-badge')) return;
+      
+      const img = imgWrapper.querySelector('.product-img-inner');
+      if (img) {
+        openLightbox(img.src);
       }
-    );
+    });
+  });
+
+  // Close event listeners
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxModal.addEventListener('click', (e) => {
+    // Close only if clicked outside the image and zoom controls
+    if (e.target === lightboxModal || e.target === imageContainer) {
+      closeLightbox();
+    }
+  });
+
+  // ESC key to close
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightboxModal.classList.contains('open')) {
+      closeLightbox();
+    }
+  });
+
+  // Zooming
+  zoomInBtn.addEventListener('click', () => {
+    if (zoomScale < 4.0) {
+      zoomScale += 0.25;
+      updateImageTransform();
+    }
+  });
+
+  zoomOutBtn.addEventListener('click', () => {
+    if (zoomScale > 0.5) {
+      zoomScale -= 0.25;
+      updateImageTransform();
+    }
+  });
+
+  zoomResetBtn.addEventListener('click', () => {
+    zoomScale = 1.0;
+    panX = 0;
+    panY = 0;
+    updateImageTransform();
+  });
+
+  // Mouse Drag to Pan
+  imageContainer.addEventListener('mousedown', (e) => {
+    if (zoomScale > 1.0) {
+      isDragging = true;
+      startX = e.clientX - panX * zoomScale;
+      startY = e.clientY - panY * zoomScale;
+      imageContainer.style.cursor = 'grabbing';
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      panX = (e.clientX - startX) / zoomScale;
+      panY = (e.clientY - startY) / zoomScale;
+      updateImageTransform();
+    }
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    imageContainer.style.cursor = '';
+  });
+
+  // Touch Drag to Pan (Mobile)
+  imageContainer.addEventListener('touchstart', (e) => {
+    if (zoomScale > 1.0 && e.touches.length === 1) {
+      isDragging = true;
+      startX = e.touches[0].clientX - panX * zoomScale;
+      startY = e.touches[0].clientY - panY * zoomScale;
+    }
+  });
+
+  imageContainer.addEventListener('touchmove', (e) => {
+    if (isDragging && e.touches.length === 1) {
+      panX = (e.touches[0].clientX - startX) / zoomScale;
+      panY = (e.touches[0].clientY - startY) / zoomScale;
+      updateImageTransform();
+      e.preventDefault(); // prevent scrolling page while panning image
+    }
+  });
+
+  imageContainer.addEventListener('touchend', () => {
+    isDragging = false;
   });
 
 

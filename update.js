@@ -417,11 +417,11 @@ html = html.replace(oldHeroHtml, newHeroHtml);
 // 4. Update Product Images and Card classes for GSAP
 html = html.replace(
   '<div class="product-img-inner p1">\n          <div class="hero-pattern" style="opacity:0.08"></div>\n          <span class="prod-label">Lawn Collection</span>\n        </div>',
-  '<img src="Photots/Peach-viscose-pakistani-suit-16072.jpg" class="product-img-inner" style="object-fit:cover;">'
+  '<img src="Photots/19c0461258951eee706a503a28441e7b.jpg" class="product-img-inner" style="object-fit:cover;">'
 );
 html = html.replace(
   '<div class="product-img-inner p2">\n          <div class="hero-pattern" style="opacity:0.08"></div>\n          <span class="prod-label">Chiffon Series</span>\n        </div>',
-  '<img src="Photots/MP000000022234210_437Wx649H_202405121648081.avif" class="product-img-inner" style="object-fit:cover;">'
+  '<img src="Photots/72c82cd0705b97203a6d006ebf9d54ed.jpg" class="product-img-inner" style="object-fit:cover;">'
 );
 html = html.replace(
   '<div class="product-img-inner p3">\n          <div class="hero-pattern" style="opacity:0.08"></div>\n          <span class="prod-label">Silk Luxe</span>\n        </div>',
